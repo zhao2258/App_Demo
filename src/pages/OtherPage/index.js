@@ -54,7 +54,7 @@ export default class OtherPage extends React.Component{
                 </Header>
                 <Content>
                     <View style={styles.container}>
-                        <Text>这里是其他页</Text>
+                        <Text>这里是其他页!</Text>
                         {/* <MapView
                             trafficEnabled={this.state.trafficEnabled}
                             baiduHeatMapEnabled={this.state.baiduHeatMapEnabled}
