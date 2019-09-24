@@ -1,12 +1,22 @@
 import React from 'react'
-import {View,AppRegistry, StyleSheet,Dimensions,Image} from 'react-native'
+import {View,AppRegistry, StyleSheet,Dimensions,Image,Alert} from 'react-native'
 import Swiper from 'react-native-swiper'
-import { Container, Header, Content,Button,Icon,Left,Text, Body,Title,Drawer } from "native-base";
+import { Container, Header, Content,Button,Icon,Left,Right,Text, Body,Title,Drawer } from "native-base";
 import { white } from 'ansi-colors';
 
 const { width, height } = Dimensions.get('window')
 
 export default class IndexPage extends React.Component{
+    componentDidMount(){
+        console.log('this.props.navigation',this.props.navigation)
+        // let id = this.props.navigation.state.params.id;
+        // if(id){
+        //     Alert.alert(
+        //         'success',
+        //         id
+        //     )
+        // }
+    }
     closeDrawer = () => {
         this.drawer._root.close()
       }
@@ -27,10 +37,19 @@ export default class IndexPage extends React.Component{
                     <Body>
                         <Title>首页</Title>
                     </Body>
+                    <Right>
+                        <Button onPress={() => this.props.navigation.navigate('scanPage',{
+                            callback:((info)=>{
+                                
+                            })
+                        })} transparent>
+                        <Icon name='scan1' type='AntDesign' />
+                        </Button>
+                    </Right>
                     </Header>
                     <Content>
                         <View>
-                        <Swiper
+                        {/* <Swiper
                             //样式
                             style={styles.wrapper}
                             //高度
@@ -55,10 +74,7 @@ export default class IndexPage extends React.Component{
                             <Image resizeMode="cover" source={require('./images/111.jpg')} style={styles.bannerImg} />
                             <Image resizeMode="cover" source={require('./images/222.jpg')} style={styles.bannerImg} />
                             <Image resizeMode="cover" source={require('./images/333.jpg')} style={styles.bannerImg} />
-                        </Swiper>
-                            {/* <Button style={{width:'50%',justifyContent:'center'}} 
-                            onPress={() => this.props.navigation.navigate('Details')}
-                            info><Text> 点击跳转到详情页 </Text></Button> */}
+                        </Swiper> */}
                         </View>
                     </Content>
                 </Drawer>

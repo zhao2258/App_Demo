@@ -5,6 +5,7 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import LoginPage from "./src/pages/Login/LoginPage";
+import scanPage from './src/pages/scanPage/index.js'
 import IndexPage from './src/pages/IndexPage/index.js'
 import MePage from './src/pages/MePage/index.js'
 import OtherPage from './src/pages/OtherPage/index.js'
@@ -60,6 +61,7 @@ const StackNavigator = createStackNavigator(
               header: null
           })
       },
+      scanPage:{screen:scanPage},
       Details:{screen:Details}
   },
   {
