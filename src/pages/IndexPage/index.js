@@ -48,7 +48,7 @@ export default class IndexPage extends React.Component{
                     </Header>
                     <Content>
                         <View>
-                        {/* <Swiper
+                        <Swiper
                             //样式
                             style={styles.wrapper}
                             //高度
@@ -73,7 +73,7 @@ export default class IndexPage extends React.Component{
                             <Image resizeMode="cover" source={require('./images/111.jpg')} style={styles.bannerImg} />
                             <Image resizeMode="cover" source={require('./images/222.jpg')} style={styles.bannerImg} />
                             <Image resizeMode="cover" source={require('./images/333.jpg')} style={styles.bannerImg} />
-                        </Swiper> */}
+                        </Swiper>
                         </View>
                         <View style={{width:'100%',minHeight:100,backgroundColor:'lightblue',}}>
                             <Text>{`扫码的结果是：${this.state.scanResult.data || ''}`}</Text>
