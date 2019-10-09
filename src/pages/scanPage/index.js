@@ -52,9 +52,9 @@ export default class Camera extends Component {
     }
     barcodeReceived(e){
         if(this.state.show){
-            console.log(e);
             if(e.data){
-                this.props.navigation.goBack({data:e.data})
+                this.props.navigation.state.params.returnData(e)
+                this.props.navigation.goBack()
             }
             this.setState({
                 transCode: e.data,
@@ -107,10 +107,10 @@ export default class Camera extends Component {
                                     </Animated.View>
                                 </View>
                             </View>
-                            <View style={styles.info}>
+                            {/* <View style={styles.info}>
                                 <Text>条码信息：{this.state.transCode}</Text>
                                 <Text>条码类型：{this.state.type}</Text>
-                            </View>
+                            </View> */}
                         </RNCamera>
                     </View>
                 </Content>
@@ -128,6 +128,7 @@ const styles = StyleSheet.create({
     },
     box: {
         flex: 1,
+        height: height,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'rgba(0,0,0,0.6)',

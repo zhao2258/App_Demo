@@ -7,15 +7,11 @@ import { white } from 'ansi-colors';
 const { width, height } = Dimensions.get('window')
 
 export default class IndexPage extends React.Component{
+    state={
+        scanResult:'', //扫码结果保存
+    }
     componentDidMount(){
-        console.log('this.props.navigation',this.props.navigation)
-        // let id = this.props.navigation.state.params.id;
-        // if(id){
-        //     Alert.alert(
-        //         'success',
-        //         id
-        //     )
-        // }
+        
     }
     closeDrawer = () => {
         this.drawer._root.close()
@@ -23,6 +19,13 @@ export default class IndexPage extends React.Component{
     openDrawer = () => { 
         this.drawer._root.open() 
       };
+
+    returnData(e) {
+        this.setState({scanResult:e});
+    }
+    goScanPage =()=>{
+        this.props.navigation.navigate('scanPage', {returnData: this.returnData.bind(this)});
+    }
     render(){
         return(
             <Container>
@@ -38,11 +41,7 @@ export default class IndexPage extends React.Component{
                         <Title>首页</Title>
                     </Body>
                     <Right>
-                        <Button onPress={() => this.props.navigation.navigate('scanPage',{
-                            callback:((info)=>{
-                                
-                            })
-                        })} transparent>
+                        <Button onPress={() => this.goScanPage()} transparent>
                         <Icon name='scan1' type='AntDesign' />
                         </Button>
                     </Right>
@@ -75,6 +74,10 @@ export default class IndexPage extends React.Component{
                             <Image resizeMode="cover" source={require('./images/222.jpg')} style={styles.bannerImg} />
                             <Image resizeMode="cover" source={require('./images/333.jpg')} style={styles.bannerImg} />
                         </Swiper> */}
+                        </View>
+                        <View style={{width:'100%',minHeight:100,backgroundColor:'lightblue',}}>
+                            <Text>{`扫码的结果是：${this.state.scanResult.data || ''}`}</Text>
+                            <Text>{`扫码的类型是：${this.state.scanResult.type || ''}`}</Text>
                         </View>
                     </Content>
                 </Drawer>
