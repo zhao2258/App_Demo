@@ -48,7 +48,7 @@ export default class IndexPage extends React.Component{
                     </Header>
                     <Content>
                         <View>
-                        <Swiper
+                        {/* <Swiper
                             //样式
                             style={styles.wrapper}
                             //高度
@@ -58,7 +58,7 @@ export default class IndexPage extends React.Component{
                             //这个很主要啊，解决白屏问题
                             removeClippedSubviews={false}
                             // 切换时间，单位秒
-                            autoplayTimeout={20} 
+                            autoplayTimeout={35} 
                             // 是否自动轮播
                             autoplay={true}
                             // 如果为true，滚动方向是横向的，如果为false，滚动方向是竖向的
@@ -73,7 +73,7 @@ export default class IndexPage extends React.Component{
                             <Image resizeMode="cover" source={require('./images/111.jpg')} style={styles.bannerImg} />
                             <Image resizeMode="cover" source={require('./images/222.jpg')} style={styles.bannerImg} />
                             <Image resizeMode="cover" source={require('./images/333.jpg')} style={styles.bannerImg} />
-                        </Swiper>
+                        </Swiper> */}
                         </View>
                         <View style={{width:'100%',minHeight:100,backgroundColor:'lightblue',}}>
                             <Text>{`扫码的结果是：${this.state.scanResult.data || ''}`}</Text>

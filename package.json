@@ -9,13 +9,16 @@
     "build-android": "cd android && ./gradlew assembleRelease"
   },
   "dependencies": {
+    "@react-native-community/viewpager": "^2.0.1",
     "native-base": "^2.13.7",
-    "react": "16.8.6",
-    "react-native": "^0.60.5",
+    "react": "^16.10.2",
+    "react-native": "^0.61.2",
+    "react-native-baidu-map": "^1.0.7",
     "react-native-camera": "^3.4.0",
     "react-native-gesture-handler": "^1.4.1",
     "react-native-reanimated": "^1.2.0",
     "react-native-swiper": "^1.5.14",
+    "react-native-viewpager": "^0.2.13",
     "react-navigation": "^4.0.2",
     "react-navigation-stack": "^1.5.4",
     "react-navigation-tabs": "^2.4.1"
