@@ -6,13 +6,11 @@ import React, {
     SafeAreaView,
     StyleSheet,
     ScrollView,
-    View,
     Text,
     StatusBar,
-    Button,
     Dimensions,
   } from 'react-native';
-  
+  import { Container, Header,View, Button, Icon, Fab,Body,Title } from 'native-base'
   import { MapView, MapTypes, Geolocation, Overlay } from 'react-native-baidu-map';
   
   const { Marker, Cluster, Arc, Circle, Polyline, Polygon, InfoWindow } = Overlay;
@@ -20,120 +18,74 @@ import React, {
 
   export default class OtherPage extends Component {
   
-    state = {
-      location: {},
-      markers: [
-        {
-          location: {
-            longitude: 113.960453,
-            latitude: 22.546045
-          }
-        },
-        {
-          location: {
-            longitude: 113.961453,
-            latitude: 22.547045
-          }
-        },
-        {
-          location: {
-            longitude: 113.962453, 
-            latitude: 22.548045
-          }
-        },
-        {
-          location: {
-            longitude: 113.963453, 
-            latitude: 22.545045
-          }
-        },
-        {
-          location: {
-            longitude: 113.964453, 
-            latitude: 22.544045
-          }
-        }
-      ]
-    };
-
+    constructor(props) {
+        super(props)
+        this.state = {
+          active: false,
+          location: {},
+          longitude: 121.4428015580,
+          latitude: 31.1942088680,
+        };
+    }
+    
     getCurrentPosition() {
+        console.log('方法被点击！')
         Geolocation.getCurrentPosition()
           .then((data) => {
+              console.log('地图数据',data)
             this.setState({ location: data });
           });
       }
-    
-      componentDidMount() {
-        
-      }
 
       render() {
+          const { longitude,latitude } = this.state
         return (
-        <View>
-          <StatusBar barStyle="dark-content" />
+        <View >
+            <Header>
+                <Body>
+                    <Title>地图{this.state.location.address ? `-当前位置：${ this.state.location.address }` : null}</Title>
+                </Body>
+            </Header>
+            <StatusBar barStyle="dark-content" />
             <SafeAreaView>
-              <ScrollView
-                contentInsetAdjustmentBehavior="automatic"
-                style={styles.scrollView}>
-                <View style={styles.body}>
-                  <MapView 
-                    width={width} 
-                    height={400} 
-                    zoom={13}
-                    trafficEnabled={true}
-                    zoomControlsVisible={true}
-                    mapType={MapTypes.NORMAL}
-                    center={{ longitude: 113.950453, latitude: 22.546045 }}
-                  >
-                    <Overlay.Marker rotate={45} ic on={{ uri: 'https://mapopen-website-wiki.cdn.bcebos.com/homePage/images/logox1.png' }} location={{ longitude: 113.975453, latitude: 22.510045 }} />
-                    <Overlay.Cluster>
-                      <Overlay.Marker location={{ longitude: 113.969453, latitude: 22.530045 }} />
-                      <Overlay.Marker location={{ longitude: 113.968453, latitude: 22.531045 }} />
-                      <Overlay.Marker location={{ longitude: 113.967453, latitude: 22.532045 }} />
-                      <Overlay.Marker location={{ longitude: 113.966453, latitude: 22.533045 }} />
-                      <Overlay.Marker location={{ longitude: 113.965453, latitude: 22.534045 }} />
-                      <Overlay.Marker location={{ longitude: 113.965453, latitude: 22.535045 }} />
-                    </Overlay.Cluster>
-                    <Overlay.Cluster>
-                      {this.state.markers.map((marker, index) => <Overlay.Marker key={`marker-` + index} location={marker.location} />)}
-                    </Overlay.Cluster>
-                    <Overlay.Polyline
-                      longitude={113.960453}
-                      latitude={22.546045}
-                      points={[{ longitude: 113.960453, latitude: 22.546145 }, { longitude: 113.961453, latitude: 22.547045 }, { longitude: 113.962453, latitude: 22.54045 }]} />
-                    <Overlay.Arc
-                      longitude={113.960453}
-                      latitude={22.546045}
-                      points={[{ longitude: 113.960453, latitude: 22.546045 }, { longitude: 113.960453, latitude: 22.546145 }, { longitude: 113.960453, latitude: 22.546245 }]} /> 
-                  </MapView>
-
-                  {/* <MapView>
-                        <Cluster>
-                            <Marker location={{ longitude: 113.969453, latitude: 22.530045 }} />
-                            <Marker location={{ longitude: 113.968453, latitude: 22.531045 }} />
-                            <Marker location={{ longitude: 113.967453, latitude: 22.532045 }} />
-                            <Marker location={{ longitude: 113.966453, latitude: 22.533045 }} />
-                            <Marker location={{ longitude: 113.965453, latitude: 22.534045 }} />
-                            <Marker location={{ longitude: 113.965453, latitude: 22.535045 }} />
-                        </Cluster>
-                    </MapView> */}
-
-
-
-                  <View style={styles.buttonGroup}>
-                <View style={styles.button}>
-                  <Button onPress={ () => this.getCurrentPosition() } title="Locate" />
-                </View>
-              </View>
-              {this.state.location.address ? (
-                <View style={styles.location}>
-                  <Text>当前位置：{ this.state.location.address }</Text>
-                </View>
-              ) : null}
-            </View>
-          </ScrollView>
-        </SafeAreaView>
-      </View>
+                <ScrollView
+                    contentInsetAdjustmentBehavior="automatic"
+                    style={styles.scrollView}>
+                    <View style={styles.body}>
+                        <MapView 
+                            width={width} 
+                            height={height - 58} 
+                            zoom={20}
+                            trafficEnabled={true}
+                            zoomControlsVisible={true}
+                            mapType={MapTypes.NORMAL}
+                            center={{ longitude, latitude }}
+                        >
+                            <Overlay.Marker  ic on={{ uri: 'https://mapopen-website-wiki.cdn.bcebos.com/homePage/images/logox1.png' }} 
+                            location={{ longitude, latitude }} />
+                        </MapView>
+                    </View>
+                </ScrollView>
+            </SafeAreaView>
+            <Fab
+                active={this.state.active}
+                direction="up"
+                containerStyle={{ }}
+                style={{ backgroundColor: '#5067FF' }}
+                position="bottomLeft"
+                onPress={() => this.setState({ active: !this.state.active })}>
+                <Icon name="plus" type="AntDesign" />
+                <Button onPress={ () => this.getCurrentPosition() } style={{ backgroundColor: '#34A34F' }}>
+                <Icon name="enviromento" type="AntDesign"/>
+                </Button>
+                {/* <Button style={{ backgroundColor: '#3B5998' }}>
+                <Icon name="logo-facebook" />
+                </Button>
+                <Button disabled style={{ backgroundColor: '#DD5144' }}>
+                <Icon name="mail" />
+                </Button> */}
+            </Fab>
+        </View>
     );
   }
   
